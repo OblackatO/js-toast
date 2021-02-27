@@ -35,6 +35,9 @@ export function mergeOptions(initialOptions, customOptions) {
  * @param {Object}  styles  An object containing the style to apply
  */
 export function stylize(element, styles) {
+	if(typeof t === null || typeof t === "undefined"){
+		return
+	}
 	Object.keys(styles).forEach((style) => {
 		element.style[style] = styles[style];
 	});
@@ -176,7 +179,13 @@ export const toast = (() => {
 	 * Hide the Toast that's currently shown.
 	 */
 	function hideToast(transitions) {
+		if (transitions === "" || typeof transitions === "undefined" || typeof transitions === null) {
+                	return
+            	}
 		const toastStage = getToastStage();
+		if (typeof toastStage === "undefined" || typeof toastStage === null || toastStage === "") {
+                    return
+                }
 		stylize(toastStage, transitions.HIDE);
 
 		// Destroy the Toast element after animations end.
